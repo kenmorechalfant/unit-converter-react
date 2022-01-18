@@ -1,38 +1,123 @@
+:root {
+  --purple-light: #B09ED6;
+  --purple-medium: #43316A;
+  --purple-dark: #25134B;
+  --soft-yellow: #e9d14d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  margin: 2rem auto;
+  background-color: var(--purple-medium);
+  color: white;
+  border-radius: 1rem;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App,
+.App input, 
+.App button {
+  font-family: 'Poppins', 'Lato', 'Roboto', sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App a {
+  color: inherit;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.Header {
+  background-color: var(--purple-dark);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.Header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  text-transform: lowercase;
+  font-weight: 400;
+}
+
+.Button {
+  background-color: var(--purple-dark);
+  color: white;
+  border: none;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+/* ----------- */
+
+.UnitConverter,
+.UnitConverter__Display,
+.UnitConverter__Numpad {
+  display: grid;
+  gap: 10px;
+}
+
+.UnitConverter {
+  height: 80vh;
+  max-height: 40rem;
+  padding: 2rem;
+
+  grid-template-rows: 2fr 4fr;
+}
+
+.UnitConverter__Input {
+  min-width: 0; /* Required so increasing font-size doesn't increase input width */
+  border-radius: 1rem;
+  font-size: 2.5rem;
+  font-weight: 900;
+  text-align: right;
+  padding: .5rem 1rem;
+  border: none;
+  background-color: white;
+  color: var(--purple-medium);
+}
+
+.UnitConverter__Input[readonly] {
+  background-color: transparent;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.UnitConverter__Display {
+  grid-template-columns: 5fr 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: 
+    "input inType typeSwap"
+    "output outType typeSwap";
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+[name="inValue"] { grid-area: input; }
+[name="inType"] { grid-area: inType; }
+[name="outValue"] { grid-area: output; }
+[name="outType"] { grid-area: outType; }
+[name="unitTypeSwap"] { grid-area: typeSwap; }
+
+.UnitConverter__Numpad {
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-template-areas: 
+    "seven eight nine clear"
+    "four five six clear"
+    "one two three backspace"
+    "zero zero dot backspace";
 }
+
+[name="0"] { grid-area: zero; }
+[name="1"] { grid-area: one; }
+[name="2"] { grid-area: two; }
+[name="3"] { grid-area: three; }
+[name="4"] { grid-area: four; }
+[name="5"] { grid-area: five; }
+[name="6"] { grid-area: six; }
+[name="7"] { grid-area: seven; }
+[name="8"] { grid-area: eight; }
+[name="9"] { grid-area: nine; }
+[name="period"] { grid-area: dot; }
+[name="backspace"] { grid-area: backspace; }
+[name="clear"] { grid-area: clear; }

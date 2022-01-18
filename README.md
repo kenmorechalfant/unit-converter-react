@@ -1,10 +1,10 @@
-# Getting Started with Create React App
+# Unit Converter React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Work in Progress**
 
-## Available Scripts
+Portfolio project for [lukechalfant.com](https://lukechalfant.com).
 
-In the project directory, you can run:
+## Scripts
 
 ### `npm start`
 

@@ -44,13 +44,13 @@ export default function App() {
       <Header />
       <form onSubmit={e => e.preventDefault()} className="UnitConverter">
         <div className="UnitConverter__Display">
-          <input className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} />
-          <Button name="inType">{inType}</Button>
+          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} />
+          <Button aria-label="change input unit type" name="inType">{inType}</Button>
 
-          <input className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={outValue} readOnly />
-          <Button name="outType">{outType}</Button>
+          <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={outValue} readOnly />
+          <Button name="outType" aria-label="change output unit type">{outType}</Button>
 
-          <Button name="unitTypeSwap"><span style={{fontSize: ".8rem"}}>SW</span></Button>
+          <Button aria-label="swap unit types" name="unitTypeSwap"><span style={{fontSize: ".8rem"}}>SW</span></Button>
         </div>
 
         <div className="UnitConverter__Numpad">
@@ -73,23 +73,4 @@ export default function App() {
       <Colophon />
     </div>
   );
-
-  // return (
-  //   <div className="App">
-  //     <Header />
-  //     <CategorySelector category={category} categorySet={categorySet} />
-      
-      
-  //     <div className="IO">
-  //       <label htmlFor="ValueInput">Input</label>
-  //       <input id="ValueInput" className="IO__Input" type="number" value={inValue} onChange={(e: React.ChangeEvent<HTMLInputElement>) => inValueSet(Number(e.target.value))}/>
-        
-  //       <label htmlFor="ValueOutput">Output</label>
-  //       <input id="ValueOutput" className="IO__Input" type="number" value={outValue} readOnly/>
-  //     </div>
-
-  //     <Numpad />
-  //     <Colophon />
-  //   </div>
-  // );
 }

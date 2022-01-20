@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Colophon from './components/Colophon';
 
 import convert, { Mass } from 'convert-units';
+import round from 'lodash/round';
 
 type UnitType = Mass;
 
@@ -25,7 +26,7 @@ export default function App() {
   const [outType, outTypeSet] = useState<UnitType>('lb');
   const [category, categorySet] = useState<Category>(Category.Weight);
 
-  let outValue: number = convert(Number(inValue)).from(inType).to(outType);
+  let outValue: string = convert(Number(inValue)).from(inType).to(outType).toString();
 
   function handleInValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     inValueSet(e.target.value);
@@ -49,15 +50,21 @@ export default function App() {
     outTypeSet(oldInType);
   }
 
+  function formatValue(value: string): string {
+    let num = Number(value);
+    
+    return round(num, 2).toString();
+  }
+
   return (
     <div className="App">
       <Header />
       <form onSubmit={e => e.preventDefault()} className="UnitConverter">
         <div className="UnitConverter__Display">
-          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} />
+          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={formatValue(inValue)} onChange={handleInValueChange} />
           <Button aria-label="change input unit type" name="inType">{inType}</Button>
 
-          <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={outValue.toFixed(2)} readOnly />
+          <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={formatValue(outValue)} readOnly />
           <Button name="outType" aria-label="change output unit type">{outType}</Button>
 
           <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}><span style={{fontSize: ".8rem"}}>SW</span></Button>
@@ -77,7 +84,7 @@ export default function App() {
           <Button name="2" onClick={() => ins('2')}>2</Button>
           <Button name="1" onClick={() => ins('1')}>1</Button>
           <Button name="0" onClick={() => ins('0')}>0</Button>
-          <Button name="period" onClick={() => ins('0')}>.</Button>
+          <Button name="period" onClick={() => ins('.')}>.</Button>
         </div>
       </form>
       <Colophon />

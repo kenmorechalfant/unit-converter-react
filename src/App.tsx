@@ -43,6 +43,12 @@ export default function App() {
     inValueSet(inValue + s);
   }
 
+  function swapUnitTypes(): void {
+    let oldInType = inType;
+    inTypeSet(outType);
+    outTypeSet(oldInType);
+  }
+
   return (
     <div className="App">
       <Header />
@@ -54,7 +60,7 @@ export default function App() {
           <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={outValue.toFixed(2)} readOnly />
           <Button name="outType" aria-label="change output unit type">{outType}</Button>
 
-          <Button aria-label="swap unit types" name="unitTypeSwap"><span style={{fontSize: ".8rem"}}>SW</span></Button>
+          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}><span style={{fontSize: ".8rem"}}>SW</span></Button>
         </div>
 
         <div className="UnitConverter__Numpad">

@@ -61,7 +61,7 @@ export default function App() {
       <Header />
       <form onSubmit={e => e.preventDefault()} className="UnitConverter">
         <div className="UnitConverter__Display">
-          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={formatValue(inValue)} onChange={handleInValueChange} />
+          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} />
           <Button aria-label="change input unit type" name="inType">{inType}</Button>
 
           <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={formatValue(outValue)} readOnly />

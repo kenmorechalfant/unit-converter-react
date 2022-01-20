@@ -66,13 +66,12 @@ export default function App() {
 
           <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={formatValue(outValue)} readOnly />
           <Button name="outType" aria-label="change output unit type">{outType}</Button>
-
-          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}><span style={{fontSize: ".8rem"}}>SW</span></Button>
         </div>
 
         <div className="UnitConverter__Numpad">
           <Button name="clear" onClick={allClear}>CLR</Button>
           <Button name="backspace" onClick={backspace}>DEL</Button>
+          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}>SW</Button>
 
           <Button name="9" onClick={() => ins('9')}>9</Button>
           <Button name="8" onClick={() => ins('8')}>8</Button>

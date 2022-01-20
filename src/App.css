@@ -1,8 +1,47 @@
 :root {
-  --purple-light: #B09ED6;
-  --purple-medium: #43316A;
-  --purple-dark: #25134B;
-  --soft-yellow: #e9d14d;
+  /* #COLORS */
+  --purple-light: #b09ed6;
+  --purple-medium: #43316a;
+  --purple-dark: #25134b;
+  --soft-yellow: #e6b736;
+  --soft-red: #ff5a6d;
+  --soft-indigo: #6f7dff;
+  --bright-yellow: #ffcc3f;
+  --cool-gray-light: #e9e6ef;
+
+  /* #LIGHT MODE */
+
+  --header-color: var(--cool-gray-light);
+  --bg-color: white;
+  --accent-color-1: var(--soft-indigo);
+  --accent-color-2: var(--bright-yellow);
+  --text-color: var(--purple-dark);
+
+  --input-color: var(--cool-gray-light);
+  --input-text-color: var(--text-color);
+  --output-color: transparent;
+  --output-text-color: var(--text-color);
+
+  --btn-color: var(--cool-gray-light);
+}
+
+  /* #DARK MODE */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --header-color: var(--purple-dark);
+    --bg-color: var(--purple-medium);
+    --accent-color-1: var(--soft-red);
+    --accent-color-2: var(--soft-yellow);
+    --text-color: white;
+
+    --input-color: white;
+    --input-text-color: var(--purple-dark);
+    --output-color: transparent;
+    --output-text-color: var(--text-color);
+
+    --btn-color: var(--purple-dark);
+  }
 }
 
 * {
@@ -13,8 +52,8 @@
   width: 100%;
   max-width: 500px;
   margin: 2rem auto;
-  background-color: var(--purple-medium);
-  color: white;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   border-radius: 1rem;
 }
 
@@ -29,7 +68,7 @@
 }
 
 .Header {
-  background-color: var(--purple-dark);
+  background-color: var(--header-color);
   border-radius: 1rem;
   padding: 1rem;
 }
@@ -42,8 +81,8 @@
 }
 
 .Button {
-  background-color: var(--purple-dark);
-  color: white;
+  background-color: var(--btn-color);
+  color: var(--text-color);
   border: none;
   border-radius: 1rem;
   font-size: 1.5rem;
@@ -75,34 +114,42 @@
   text-align: right;
   padding: .5rem 1rem;
   border: none;
-  background-color: white;
-  color: var(--purple-medium);
+  background-color: var(--input-color);
+  color: var(--input-text-color);
 }
 
 .UnitConverter__Input[readonly] {
-  background-color: transparent;
-  color: white;
+  background-color: var(--output-color);
+  color: var(--output-text-color);
 }
 
 .UnitConverter__Display {
-  grid-template-columns: 5fr 2fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: 1fr 1fr;
   grid-template-areas: 
-    "input inType typeSwap"
-    "output outType typeSwap";
+    "input input input inType"
+    "output output output outType";
+}
+
+[name="inType"],
+[name="outType"] {
+  background-color: var(--accent-color-1);
+}
+
+[name="unitTypeSwap"] {
+  background-color: var(--accent-color-2);
 }
 
 [name="inValue"] { grid-area: input; }
 [name="inType"] { grid-area: inType; }
 [name="outValue"] { grid-area: output; }
 [name="outType"] { grid-area: outType; }
-[name="unitTypeSwap"] { grid-area: typeSwap; }
 
 .UnitConverter__Numpad {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(4, 1fr);
   grid-template-areas: 
-    "seven eight nine clear"
+    "seven eight nine typeSwap"
     "four five six clear"
     "one two three backspace"
     "zero zero dot backspace";
@@ -121,3 +168,4 @@
 [name="period"] { grid-area: dot; }
 [name="backspace"] { grid-area: backspace; }
 [name="clear"] { grid-area: clear; }
+[name="unitTypeSwap"] { grid-area: typeSwap; }

@@ -3,6 +3,10 @@ import './App.css';
 import Header from './components/Header';
 import Colophon from './components/Colophon';
 
+import convert, { Mass } from 'convert-units';
+
+type UnitType = Mass;
+
 enum Category {
   Weight = 0,
   Length = 1,
@@ -17,11 +21,11 @@ function Button(props: ButtonProps) {
 
 export default function App() {
   const [inValue, inValueSet] = useState<string>('50');
-  const [inType, inTypeSet] = useState<string>('kg');
-  const [outType, outTypeSet] = useState<string>('lb');
+  const [inType, inTypeSet] = useState<UnitType>('kg');
+  const [outType, outTypeSet] = useState<UnitType>('lb');
   const [category, categorySet] = useState<Category>(Category.Weight);
 
-  let outValue = inValue + '?!'; // #TODO unit conversion
+  let outValue: number = convert(Number(inValue)).from(inType).to(outType);
 
   function handleInValueChange(e: React.ChangeEvent<HTMLInputElement>) {
     inValueSet(e.target.value);
@@ -47,7 +51,7 @@ export default function App() {
           <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} />
           <Button aria-label="change input unit type" name="inType">{inType}</Button>
 
-          <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={outValue} readOnly />
+          <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={outValue.toFixed(2)} readOnly />
           <Button name="outType" aria-label="change output unit type">{outType}</Button>
 
           <Button aria-label="swap unit types" name="unitTypeSwap"><span style={{fontSize: ".8rem"}}>SW</span></Button>

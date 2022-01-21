@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, Ref } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Colophon from './components/Colophon';
@@ -25,6 +25,9 @@ export default function App() {
   const [inType, inTypeSet] = useState<UnitType>('kg');
   const [outType, outTypeSet] = useState<UnitType>('lb');
   const [category, categorySet] = useState<Category>(Category.Weight);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => inputRef.current?.focus(), []);
 
   let outValue: string = convert(Number(inValue)).from(inType).to(outType).toString();
 
@@ -61,7 +64,7 @@ export default function App() {
       <Header />
       <form onSubmit={e => e.preventDefault()} className="UnitConverter">
         <div className="UnitConverter__Display">
-          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} />
+          <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} ref={inputRef} />
           <Button aria-label="change input unit type" name="inType">{inType}</Button>
 
           <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={formatValue(outValue)} readOnly />

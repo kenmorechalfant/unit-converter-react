@@ -53,11 +53,11 @@
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  max-width: 500px;
-  min-height: 100%;
+  height: 100%;
   margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
+  font-size: 4vh;
 }
 
 .App,
@@ -72,12 +72,13 @@
 
 .Header {
   background-color: var(--header-color);
-  padding: 1.5rem 2rem;
+  padding: .5em 1em;
 }
 
 .Header h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: .75em;
+  line-height: 1em;
   text-transform: lowercase;
   font-weight: 400;
 }
@@ -87,14 +88,18 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding-bottom: 1rem;
-  gap: 1rem 2rem;
+  /* gap: .5em; */
 }
 
 .Colophon a {
-  color: var(--btn-color);
+  flex-grow: 1;
+  font-size: .5em;
+  line-height: 1;
   font-weight: 900;
   text-decoration: none;
+  color: var(--btn-color);
+  padding: 1em;
+  text-align: center;
 }
 
 .Colophon a:hover,
@@ -112,11 +117,15 @@
 
 @media (min-width: 500px) {
   .App {
-    height: auto;
-    margin: 2rem auto;
+    width: auto;
+    height: 90vh;
+    justify-content: unset;
+    aspect-ratio: 1 / 1.75;
+
+    overflow: hidden;
+
+    margin: 0 auto;
     border-radius: 1rem;
-    min-height: unset;
-    max-height: calc(100vh - 4rem);
   }
 
   .Header {
@@ -131,8 +140,9 @@
   background-color: var(--btn-color);
   color: var(--text-color);
   border: none;
-  border-radius: 1rem;
-  font-size: 1.5rem;
+  border-radius: 2vh;
+  font-size: 1em;
+  line-height: 1;
   font-weight: 900;
 }
 
@@ -142,29 +152,30 @@
 .UnitConverter__Display,
 .UnitConverter__Numpad {
   display: grid;
-  gap: .5rem;
+  gap: .5em;
 }
 
 .UnitConverter {
-  height: calc(90vmax - 1rem);
-  padding: .5rem;
-
+  overflow: hidden;
+  padding: .5em;
+  padding-bottom: 0;
   grid-template-rows: 2fr 4fr;
 }
 
 @media (min-width: 500px) {
   .UnitConverter {
-    padding: 2rem;
+    padding: 1em;
+    padding-bottom: 0;
   }
 }
 
 .UnitConverter__Input {
   min-width: 0; /* Required so increasing font-size doesn't increase input width */
-  border-radius: 1rem;
-  font-size: 2.5rem;
+  border-radius: 2vh;
+  font-size: 1.75em;
   font-weight: 900;
   text-align: right;
-  padding: .5rem 1rem;
+  padding: 0 .25em;
   border: none;
   background-color: var(--input-color);
   color: var(--input-text-color);

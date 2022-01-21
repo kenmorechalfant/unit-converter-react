@@ -1,5 +1,5 @@
 :root {
-  /* #COLORS */
+  /* #COLOR VARIABLES */
   --purple-light: #b09ed6;
   --purple-medium: #43316a;
   --purple-dark: #25134b;
@@ -49,12 +49,15 @@
 }
 
 .App {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   max-width: 500px;
-  margin: 2rem auto;
+  min-height: 100%;
+  margin: 0;
   background-color: var(--bg-color);
   color: var(--text-color);
-  border-radius: 1rem;
 }
 
 .App,
@@ -69,8 +72,7 @@
 
 .Header {
   background-color: var(--header-color);
-  border-radius: 1rem;
-  padding: 1rem;
+  padding: 1.5rem 2rem;
 }
 
 .Header h1 {
@@ -79,6 +81,51 @@
   text-transform: lowercase;
   font-weight: 400;
 }
+
+.Colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 1rem;
+  gap: 1rem 2rem;
+}
+
+.Colophon a {
+  color: var(--btn-color);
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.Colophon a:hover,
+.Colophon a:focus,
+.Colophon a:active {
+  color: var(--accent-color-1);
+  text-decoration: wavy;
+}
+
+.Colophon a:hover,
+.Colophon a:focus,
+.Colophon a:active {
+  opacity: 1;
+}
+
+@media (min-width: 500px) {
+  .App {
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 1rem;
+    min-height: unset;
+    max-height: calc(100vh - 4rem);
+  }
+
+  .Header {
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+}
+
+/* ----------- */
 
 .Button {
   background-color: var(--btn-color);
@@ -95,15 +142,20 @@
 .UnitConverter__Display,
 .UnitConverter__Numpad {
   display: grid;
-  gap: 10px;
+  gap: .5rem;
 }
 
 .UnitConverter {
-  height: 80vh;
-  max-height: 40rem;
-  padding: 2rem;
+  height: calc(90vmax - 1rem);
+  padding: .5rem;
 
   grid-template-rows: 2fr 4fr;
+}
+
+@media (min-width: 500px) {
+  .UnitConverter {
+    padding: 2rem;
+  }
 }
 
 .UnitConverter__Input {

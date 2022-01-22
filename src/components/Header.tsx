@@ -1,9 +1,10 @@
 import React from 'react';
+import { MdSwapCalls as IconLogo } from 'react-icons/md';
 
 function Header() {
   return (
     <div className="Header">
-      <h1>Unit Converter</h1>
+      <h1><IconLogo /> Unit Converter</h1>
     </div>
   );
 }

@@ -72,7 +72,7 @@
 
 .Header {
   background-color: var(--header-color);
-  padding: .5em 1em;
+  padding: 1em;
 }
 
 .Header h1 {
@@ -81,6 +81,13 @@
   line-height: 1em;
   text-transform: lowercase;
   font-weight: 400;
+}
+
+.Header h1 svg {
+  vertical-align: middle;
+  color: var(--accent-color-1);
+  transform: scale(1.5);
+  margin-right: .5rem;
 }
 
 .Colophon {
@@ -200,7 +207,15 @@
 }
 
 [name="unitTypeSwap"] {
+  display: grid;
+  place-content: center;
   background-color: var(--accent-color-2);
+}
+
+[name="unitTypeSwap"] > svg {
+  display: grid;
+  place-content: center;
+  transform: scale(1.75);
 }
 
 [name="inValue"] { grid-area: input; }
@@ -214,7 +229,7 @@
   grid-template-areas: 
     "seven eight nine typeSwap"
     "four five six clear"
-    "one two three backspace"
+    "one two three clear"
     "zero zero dot backspace";
 }
 

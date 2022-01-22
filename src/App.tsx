@@ -3,6 +3,9 @@ import './App.css';
 import Header from './components/Header';
 import Colophon from './components/Colophon';
 
+import { MdBackspace as IconDelete } from 'react-icons/md';
+import { MdSwapVert as IconSwap } from 'react-icons/md';
+
 import convert, { Mass } from 'convert-units';
 import round from 'lodash/round';
 
@@ -72,9 +75,9 @@ export default function App() {
         </div>
 
         <div className="UnitConverter__Numpad">
-          <Button name="clear" onClick={allClear}>CLR</Button>
-          <Button name="backspace" onClick={backspace}>DEL</Button>
-          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}>SW</Button>
+          <Button name="clear" onClick={allClear}>AC</Button>
+          <Button name="backspace" onClick={backspace}><IconDelete /></Button>
+          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}><IconSwap /></Button>
 
           <Button name="9" onClick={() => ins('9')}>9</Button>
           <Button name="8" onClick={() => ins('8')}>8</Button>

@@ -4,7 +4,7 @@
   --purple-medium: #43316a;
   --purple-dark: #25134b;
   --soft-yellow: #e6b736;
-  --soft-red: #ff5a6d;
+  --soft-red: #f24f59;
   --soft-indigo: #6f7dff;
   --bright-yellow: #ffcc3f;
   --cool-gray-light: #e9e6ef;
@@ -87,7 +87,7 @@
   vertical-align: middle;
   color: var(--accent-color-1);
   transform: scale(1.5);
-  margin-right: .5rem;
+  margin-right: .5em;
 }
 
 .Colophon {
@@ -95,7 +95,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  /* gap: .5em; */
+  padding: 0 1em;
 }
 
 .Colophon a {
@@ -105,7 +105,7 @@
   font-weight: 900;
   text-decoration: none;
   color: var(--btn-color);
-  padding: 1em;
+  padding: 1.5em 1em;
   text-align: center;
 }
 

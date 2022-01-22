@@ -109,6 +109,10 @@
   text-align: center;
 }
 
+.Colophon__Link--IconLink svg {
+  transform: scale(1.5);
+}
+
 .Colophon a:hover,
 .Colophon a:focus,
 .Colophon a:active {

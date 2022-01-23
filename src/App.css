@@ -3,6 +3,7 @@
   --purple-light: #b09ed6;
   --purple-medium: #43316a;
   --purple-dark: #25134b;
+  --deep-purple: #110230;
   --soft-yellow: #e6b736;
   --soft-red: #f24f59;
   --soft-indigo: #6f7dff;
@@ -14,10 +15,13 @@
   /* #LIGHT MODE */
 
   --header-color: var(--cool-gray-light);
+
+  --text-color: var(--purple-dark);
+  --link-color: var(--warm-gray-medium);
+
   --bg-color: white;
   --accent-color-1: var(--soft-indigo);
   --accent-color-2: var(--bright-yellow);
-  --text-color: var(--purple-dark);
 
   --input-color: var(--cool-gray-light);
   --input-text-color: var(--text-color);
@@ -35,10 +39,13 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --header-color: var(--purple-dark);
+
+    --text-color: white;
+    --link-color: var(--purple-light);
+
     --bg-color: var(--purple-medium);
     --accent-color-1: var(--soft-red);
     --accent-color-2: var(--soft-yellow);
-    --text-color: white;
 
     --input-color: white;
     --input-text-color: var(--purple-dark);
@@ -54,6 +61,10 @@
 
 * {
   box-sizing: border-box;
+}
+
+.u-font-weight--normal {
+  font-weight: normal;
 }
 
 .App {
@@ -75,7 +86,8 @@
 }
 
 .App a {
-  color: inherit;
+  color: var(--link-color);
+  letter-spacing: .05em;
 }
 
 .Header {
@@ -112,7 +124,6 @@
   line-height: 1;
   font-weight: 900;
   text-decoration: none;
-  color: var(--btn-color);
   padding: 1.5em 1em;
   text-align: center;
   border-radius: 2vh;
@@ -132,12 +143,6 @@
   color: var(--accent-color-1);
   text-decoration: var(--accent-color-2) wavy underline;
   text-decoration-thickness: 2px;
-}
-
-.Colophon a:hover,
-.Colophon a:focus,
-.Colophon a:active {
-  opacity: 1;
 }
 
 @media (min-width: 30em) {

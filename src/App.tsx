@@ -65,7 +65,7 @@ export default function App() {
   return (
     <div className="App">
       <Header />
-      <form onSubmit={e => e.preventDefault()} className="UnitConverter">
+      <form autoComplete="off" onSubmit={e => e.preventDefault()} className="UnitConverter">
         <div className="UnitConverter__Display">
           <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} ref={inputRef} />
           <Button aria-label="change input unit type" name="inType">{inType}</Button>

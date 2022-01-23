@@ -75,21 +75,21 @@ export default function App() {
         </div>
 
         <div className="UnitConverter__Numpad">
-          <Button name="clear" onClick={allClear}>AC</Button>
-          <Button name="backspace" onClick={backspace}><IconDelete /></Button>
-          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}><IconSwap /></Button>
-
-          <Button name="9" onClick={() => ins('9')}>9</Button>
-          <Button name="8" onClick={() => ins('8')}>8</Button>
           <Button name="7" onClick={() => ins('7')}>7</Button>
-          <Button name="6" onClick={() => ins('6')}>6</Button>
-          <Button name="5" onClick={() => ins('5')}>5</Button>
+          <Button name="8" onClick={() => ins('8')}>8</Button>
+          <Button name="9" onClick={() => ins('9')}>9</Button>
+          <Button aria-label="swap unit types" name="unitTypeSwap" onClick={swapUnitTypes}><IconSwap /></Button>
           <Button name="4" onClick={() => ins('4')}>4</Button>
-          <Button name="3" onClick={() => ins('3')}>3</Button>
-          <Button name="2" onClick={() => ins('2')}>2</Button>
+          <Button name="5" onClick={() => ins('5')}>5</Button>
+          <Button name="6" onClick={() => ins('6')}>6</Button>
           <Button name="1" onClick={() => ins('1')}>1</Button>
+          <Button name="2" onClick={() => ins('2')}>2</Button>
+          <Button name="3" onClick={() => ins('3')}>3</Button>
           <Button name="0" onClick={() => ins('0')}>0</Button>
           <Button name="period" onClick={() => ins('.')}>.</Button>
+
+          <Button name="clear" onClick={allClear}>AC</Button>
+          <Button name="backspace" onClick={backspace}><IconDelete /></Button>
         </div>
       </form>
       <Colophon />

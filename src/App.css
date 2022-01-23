@@ -8,6 +8,8 @@
   --soft-indigo: #6f7dff;
   --bright-yellow: #ffcc3f;
   --cool-gray-light: #e9e6ef;
+  --cool-gray-medium: #d6d2dd;
+  --warm-gray-medium: #cac2c7;
 
   /* #LIGHT MODE */
 
@@ -22,7 +24,10 @@
   --output-color: transparent;
   --output-text-color: var(--text-color);
 
+  --outline-color: black;
+
   --btn-color: var(--cool-gray-light);
+  --btn-edge-color: hsl(241deg 100% 17% / 10%);
 }
 
   /* #DARK MODE */
@@ -40,7 +45,10 @@
     --output-color: transparent;
     --output-text-color: var(--text-color);
 
+    --outline-color: white;
+
     --btn-color: var(--purple-dark);
+    --btn-edge-color: hsl(241deg 100% 9% / 25%);
   }
 }
 
@@ -107,6 +115,11 @@
   color: var(--btn-color);
   padding: 1.5em 1em;
   text-align: center;
+  border-radius: 2vh;
+}
+
+.Colophon a:focus {
+  outline: 2px solid var(--outline-color);
 }
 
 .Colophon__Link--IconLink svg {
@@ -151,10 +164,25 @@
   background-color: var(--btn-color);
   color: var(--text-color);
   border: none;
-  border-radius: 2vh;
+  border-radius: 1.5vh;
   font-size: 1em;
   line-height: 1;
   font-weight: 900;
+  transition: box-shadow .1s linear,
+              transform .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  border: 2px solid var(--btn-edge-color);
+  box-shadow: inset 0 -.15em 0 var(--btn-edge-color);
+}
+
+.Button:hover,
+.Button:focus,
+.Button:active {
+  transform: scale(0.95);
+  box-shadow: inset 0 -.05em 0 var(--btn-edge-color);
+}
+
+.Button:focus {
+  outline: 2px solid var(--outline-color);
 }
 
 /* ----------- */
@@ -163,7 +191,7 @@
 .UnitConverter__Display,
 .UnitConverter__Numpad {
   display: grid;
-  gap: .5em;
+  gap: .25em;
 }
 
 .UnitConverter {
@@ -182,7 +210,7 @@
 
 .UnitConverter__Input {
   min-width: 0; /* Required so increasing font-size doesn't increase input width */
-  border-radius: 2vh;
+  border-radius: 1.5vh;
   font-size: 1.75em;
   font-weight: 900;
   text-align: right;
@@ -190,6 +218,10 @@
   border: none;
   background-color: var(--input-color);
   color: var(--input-text-color);
+}
+
+.UnitConverter__Input:focus {
+  outline: 2px solid var(--outline-color);
 }
 
 .UnitConverter__Input[readonly] {

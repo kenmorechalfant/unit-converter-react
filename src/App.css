@@ -119,7 +119,7 @@
 }
 
 .Colophon a:focus {
-  outline: 2px solid var(--outline-color);
+  outline: .5vh solid var(--outline-color);
 }
 
 .Colophon__Link--IconLink svg {
@@ -130,7 +130,8 @@
 .Colophon a:focus,
 .Colophon a:active {
   color: var(--accent-color-1);
-  text-decoration: wavy;
+  text-decoration: var(--accent-color-2) wavy underline;
+  text-decoration-thickness: 2px;
 }
 
 .Colophon a:hover,
@@ -143,7 +144,7 @@
   .App {
     width: auto;
     height: 90vh;
-    justify-content: unset;
+    justify-content: space-between;
     aspect-ratio: 1 / 1.75;
 
     overflow: hidden;
@@ -153,8 +154,8 @@
   }
 
   .Header {
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
+    border-top-left-radius: 2vh;
+    border-top-right-radius: 2vh;
   }
 }
 
@@ -182,7 +183,7 @@
 }
 
 .Button:focus {
-  outline: 2px solid var(--outline-color);
+  outline: .5vh solid var(--outline-color);
 }
 
 /* ----------- */
@@ -210,6 +211,8 @@
 
 .UnitConverter__Input {
   min-width: 0; /* Required so increasing font-size doesn't increase input width */
+  height: calc(100% - 0.15em);
+  align-self: center;
   border-radius: 1.5vh;
   font-size: 1.75em;
   font-weight: 900;
@@ -218,15 +221,19 @@
   border: none;
   background-color: var(--input-color);
   color: var(--input-text-color);
+  box-shadow: inset 0 .15em 0 var(--btn-edge-color);
+  transition: box-shadow .1s linear;
 }
 
 .UnitConverter__Input:focus {
-  outline: 2px solid var(--outline-color);
+  box-shadow: inset 0 0 0 var(--btn-edge-color);
+  outline: .5vh solid var(--accent-color-2);
 }
 
 .UnitConverter__Input[readonly] {
   background-color: var(--output-color);
   color: var(--output-text-color);
+  box-shadow: none;
 }
 
 .UnitConverter__Display {

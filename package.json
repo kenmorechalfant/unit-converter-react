@@ -1,7 +1,7 @@
 {
   "name": "react-unit-converter",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependencies": {
     "@types/convert-units": "2.3.5",
     "@types/lodash": "^4.14.178",

@@ -1,0 +1,60 @@
+:root {
+  /* #COLOR VARIABLES */
+  --purple-light: #b09ed6;
+  --purple-medium: #43316a;
+  --purple-dark: #25134b;
+  --deep-purple: #110230;
+  --soft-yellow: #e6b736;
+  --soft-red: #f24f59;
+  --soft-indigo: #6f7dff;
+  --bright-yellow: #ffcc3f;
+  --cool-gray-light: #e9e6ef;
+  --cool-gray-medium: #d6d2dd;
+  --warm-gray-medium: #cac2c7;
+
+  /* #LIGHT MODE */
+
+  --header-color: var(--cool-gray-light);
+
+  --text-color: var(--purple-dark);
+  --link-color: var(--warm-gray-medium);
+
+  --bg-color: white;
+  --accent-color-1: var(--soft-indigo);
+  --accent-color-2: var(--bright-yellow);
+
+  --input-color: var(--cool-gray-light);
+  --input-text-color: var(--text-color);
+  --output-color: transparent;
+  --output-text-color: var(--text-color);
+
+  --outline-color: black;
+
+  --btn-color: var(--cool-gray-light);
+  --btn-edge-color: hsl(241deg 100% 17% / 10%);
+}
+
+  /* #DARK MODE */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --header-color: var(--purple-dark);
+
+    --text-color: white;
+    --link-color: var(--purple-light);
+
+    --bg-color: var(--purple-medium);
+    --accent-color-1: var(--soft-red);
+    --accent-color-2: var(--soft-yellow);
+
+    --input-color: white;
+    --input-text-color: var(--purple-dark);
+    --output-color: transparent;
+    --output-text-color: var(--text-color);
+
+    --outline-color: white;
+
+    --btn-color: var(--purple-dark);
+    --btn-edge-color: hsl(241deg 100% 9% / 25%);
+  }
+}

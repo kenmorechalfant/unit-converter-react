@@ -1,4 +1,4 @@
-import React from 'react';
+import './Header.css';
 import { MdSwapCalls as IconLogo } from 'react-icons/md';
 
 function Header() {

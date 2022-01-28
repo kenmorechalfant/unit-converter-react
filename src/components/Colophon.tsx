@@ -1,4 +1,4 @@
-import React from 'react';
+import './Colophon.css';
 import { BsLinkedin as IconLinkedin, BsGithub as IconGithub } from 'react-icons/bs';
 
 function Colophon() {

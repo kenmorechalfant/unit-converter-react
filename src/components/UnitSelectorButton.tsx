@@ -99,7 +99,7 @@ export default function UnitSelectorButton({value, onClick, onTypeChange, childr
     >
       {children}
 
-      <div className={isOpen ? 'open' : ''}>
+      <div className={`UnitSelectorButton__Dialog ${isOpen ? 'open' : ''}`}>
         <input type="radio" id="mg" name="mg" value="mg" checked={value === 'mg'} onClick={() => onTypeChange?.('mg')} />
         <label htmlFor="mg">mg</label>
 

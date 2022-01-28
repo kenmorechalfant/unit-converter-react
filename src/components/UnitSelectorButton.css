@@ -1,0 +1,85 @@
+.UnitSelectorButton,
+.UnitSelectorButton__Dialog {
+  background-color: var(--bg-color);
+}
+
+.UnitSelectorButton {
+  position: relative;
+  transition: all 0.1s ease-out;
+}
+
+.UnitSelectorButton__Dialog {
+  position: absolute;
+  top: 90%;
+  left: 100%;
+  right: 0;
+  opacity: 0;
+  pointer-events: none;
+  display: grid;
+  padding: 1em;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  gap: 1rem;
+  border-radius: 1rem 0 1rem 1rem;
+  transform-origin: top right;
+  transform: scaleY(0.1);
+
+  transition: all 0.12s ease-out;
+}
+
+.UnitSelectorButton__Dialog__Option {
+  display: inline-block;
+  padding: 0.1em 0.5em;
+  font-weight: 900;
+  color: white;
+  font-size: 1.1em;
+  line-height: 1em;
+  border-radius: 1em;
+}
+
+/* 
+Change to 'focus inside'?
+
+Pseudo Code:  
+
+When you have the element focused
+  && you Press Space, Enter or the Down Arrow:
+    change tabindex from -1 to 0 on all child options
+    && focus the currently selected option
+      (options are radio box + labels with the bubble hidden)
+*/
+
+.UnitSelectorButton:focus-within,
+.UnitSelectorButton:focus-within .UnitSelectorButton__Dialog {
+  background-color: var(--active-color);
+  outline: none;
+}
+
+.UnitSelectorButton:focus-within {
+  border-bottom: none;
+}
+
+.UnitSelectorButton:focus-within .UnitSelectorButton__Dialog {
+  border-top: none;
+}
+
+.UnitSelectorButton:focus-within {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.UnitSelectorButton:focus-within .UnitSelectorButton__Dialog {
+  top: 100%;
+  left: -100%;
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: unset;
+}
+
+.UnitSelectorButton__Dialog__Option:hover,
+.UnitSelectorButton__Dialog__Option:active {
+  background-color: #00000022;
+}
+
+.UnitSelectorButton__Dialog__Option:focus {
+  outline: 0.25rem solid #00000022;
+}

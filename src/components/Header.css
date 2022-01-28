@@ -1,0 +1,26 @@
+.Header {
+  background-color: var(--header-color);
+  padding: 1em;
+}
+
+.Header h1 {
+  margin: 0;
+  font-size: 100%;
+  line-height: 1em;
+  text-transform: lowercase;
+  font-weight: 400;
+}
+
+.Header h1 svg {
+  vertical-align: middle;
+  color: var(--accent-color-1);
+  transform: scale(1.5);
+  margin-right: .5em;
+}
+
+@media (min-width: 30em) {
+  .Header {
+    border-top-left-radius: 2vh;
+    border-top-right-radius: 2vh;
+  }
+}

@@ -1,0 +1,34 @@
+.Colophon {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1em;
+}
+
+.Colophon a {
+  flex-grow: 1;
+  font-size: .5em;
+  line-height: 1;
+  font-weight: 900;
+  text-decoration: none;
+  padding: 1.5em 1em;
+  text-align: center;
+  border-radius: 2vh;
+}
+
+.Colophon a:focus {
+  outline: .5vh solid var(--outline-color);
+}
+
+.Colophon__Link--IconLink svg {
+  transform: scale(1.5);
+}
+
+.Colophon a:hover,
+.Colophon a:focus,
+.Colophon a:active {
+  color: var(--accent-color-1);
+  text-decoration: var(--accent-color-2) wavy underline;
+  text-decoration-thickness: 2px;
+}

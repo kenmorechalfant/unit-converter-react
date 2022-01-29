@@ -1,12 +1,16 @@
+/* #UnitSelectorButton */
+
 .UnitSelectorButton,
 .UnitSelectorButton__Dialog {
-  background-color: var(--bg-color);
+  background-color: var(--btn-color);
 }
 
 .UnitSelectorButton {
   position: relative;
   transition: all 0.1s ease-out;
 }
+
+/* #Dialog */
 
 .UnitSelectorButton__Dialog {
   position: absolute;
@@ -26,7 +30,68 @@
   transition: all 0.12s ease-out;
 }
 
+.UnitSelectorButton--open {
+  z-index: 1;
+}
+
+.UnitSelectorButton--open,
+.UnitSelectorButton--open .UnitSelectorButton__Dialog {
+  background-color: white;
+  color: black;
+  outline: none;
+}
+
+.UnitSelectorButton--open {
+  border-bottom: none;
+}
+
+.UnitSelectorButton--open .UnitSelectorButton__Dialog {
+  border-top: none;
+}
+
+.UnitSelectorButton--open {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.UnitSelectorButton--open .UnitSelectorButton__Dialog {
+  top: 100%;
+  left: -100%;
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: unset;
+}
+
+/* #Option */
+
 .UnitSelectorButton__Dialog__Option {
+  position: relative;
+  display: flex;
+  padding: .1em .5em;
+  border-radius: 1em;
+  font-size: .5em;
+  background-color: red;
+}
+
+.UnitSelectorButton__Dialog__Option:focus-wthin {
+  background-color: black;
+  color: white;
+  outline: 4px solid green;
+}
+
+.UnitSelectorButton__Dialog__Option input {
+  position: absolute;
+  /* opacity: 0; */
+  outline: 2px solid blue;
+  width: 100%;
+  height: 100%;
+}
+
+.UnitSelectorButton__Dialog__Option--selected {
+  background-color: rgb(245, 208, 0);
+}
+
+/* .UnitSelectorButton__Dialog__Option {
   display: inline-block;
   padding: 0.1em 0.5em;
   font-weight: 900;
@@ -36,45 +101,6 @@
   border-radius: 1em;
 }
 
-/* 
-Change to 'focus inside'?
-
-Pseudo Code:  
-
-When you have the element focused
-  && you Press Space, Enter or the Down Arrow:
-    change tabindex from -1 to 0 on all child options
-    && focus the currently selected option
-      (options are radio box + labels with the bubble hidden)
-*/
-
-.UnitSelectorButton:focus-within,
-.UnitSelectorButton:focus-within .UnitSelectorButton__Dialog {
-  background-color: var(--active-color);
-  outline: none;
-}
-
-.UnitSelectorButton:focus-within {
-  border-bottom: none;
-}
-
-.UnitSelectorButton:focus-within .UnitSelectorButton__Dialog {
-  border-top: none;
-}
-
-.UnitSelectorButton:focus-within {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-
-.UnitSelectorButton:focus-within .UnitSelectorButton__Dialog {
-  top: 100%;
-  left: -100%;
-  transform: scaleY(1);
-  opacity: 1;
-  pointer-events: unset;
-}
-
 .UnitSelectorButton__Dialog__Option:hover,
 .UnitSelectorButton__Dialog__Option:active {
   background-color: #00000022;
@@ -82,4 +108,4 @@ When you have the element focused
 
 .UnitSelectorButton__Dialog__Option:focus {
   outline: 0.25rem solid #00000022;
-}
+} */

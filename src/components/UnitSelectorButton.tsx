@@ -1,56 +1,44 @@
-import { useState, useEffect } from "react";
+import './UnitSelectorButton.css';
+import React, { useState, useEffect, useRef } from "react";
 import tinykeys from "tinykeys";
+import convert from 'convert-units';
 import UnitType from "../types/UnitType";
 
 export type UnitSelectorButtonProps = React.HTMLAttributes<HTMLElement> & {
   name?: string,
   value: UnitType,
+  category: 'mass' | 'length' | 'temperature',
   onTypeChange?: (value: UnitType) => void
 }
 
-export default function UnitSelectorButton({value, onClick, onTypeChange, children, ...props}: UnitSelectorButtonProps) {
+export default function UnitSelectorButton({value, category, onClick, onTypeChange, children, ...props}: UnitSelectorButtonProps) {
   const [isOpen, isOpenSet] = useState<boolean>(false);
-  // TODO:
-  // const [hasFocus, hasFocusSet] = useState<boolean>(false);
+  const [focusState, focusStateSet] = useState<null | 'self' | 'within'>(null);
+  const $self = useRef<HTMLButtonElement | null>(null);
+  const possibleTypes: string[] = convert().possibilities(category);
 
-  // props.value: string (e.g.: mg, g, kg, lbs, etc)
-    // set via a radio button (styled to just look like a label/button)
-
+  /* 
+    Focus the current radio button when the dialog opens. 
+  */
   useEffect(() => {
-    /* 
-      subscribe to key events: spacebar, enter, esc, etc
-        maybe write my own interface/provider over my input code and/or whatever lib i use
-    */
-     
+    if (isOpen) {
+      ($self.current?.querySelector(`[name="${value}"]`) as HTMLElement)?.focus(); 
+    }
+  }, [isOpen]);
+
+  /* 
+    Subscribe/Unsubscribe key events 
+  */
+  useEffect(() => {
     let unsubscribe = tinykeys(window, {
       "Space": () => {
-        openDialog();
+        if (focusState === 'self') openDialog();
       },
       "Enter": () => {
-        openDialog();
+        if (focusState === 'self') openDialog();
       },
-      "Escape": () => {
-        closeDialog();
-      }
+      "Escape": () => closeDialog()
     });
-
-    // TODO: 
-  
-    // when activated by keypress:
-    
-      // [?] Maybe a good idea to memoize the function based on a 'isFocused' state variable
-      //     You don't have to be focused to click it though
-
-    // when activated by click:
-    //   open()
-
-    // open():
-    //   disable tabindex on self
-    //   enable tabindex on the dialog's inputs
-    //   focus the first input element in the dialog
-
-    // when 'esc' || lose focus:
-    //   update focus state
 
     return () => {
       unsubscribe();
@@ -58,59 +46,70 @@ export default function UnitSelectorButton({value, onClick, onTypeChange, childr
   });
 
   function openDialog() {
-    // TODO: 
-    //   first check if we are focused:
-    //     open
-      // alert("openDialog");
-  }
-
-  function closeDialog() {
-    // TODO: 
-      // alert("closeDialog");
-  }
-
-  function handleClick(e: any) {
-    onClick?.(e);
-
-    // TODO:
-    // alert('clicked');
-} 
-
-  function handleFocus() {
     isOpenSet(true);
   }
 
-  function handleBlur() {
-    isOpenSet(false);
+  function closeDialog() {
+    if (focusState === 'within') {
+      $self.current?.focus();
+      isOpenSet(false);
+    }
   }
 
-  function handleKeyDown(e: React.KeyboardEvent<HTMLElement>) {
-    isOpenSet(false);
+  function handleClickButton(e: any) {
+    onClick?.(e);
+    openDialog();
+  }
+
+  function handleFocus(e: React.FocusEvent) {
+    // Note: a node contains() itself so we explicitly check for just self first
+    if (e.target === $self.current) {
+      focusStateSet('self');
+      closeDialog();
+    } else if ($self.current?.contains(e.target)) {
+      focusStateSet('within');
+    }
+  }
+
+  function handleBlur(e: React.FocusEvent) {
+    if (!$self.current?.contains(e.relatedTarget)) {
+      focusStateSet(null);
+      closeDialog();
+    }
   }
 
   return (
-    <button 
-      className="Button" 
-      onClick={handleClick} 
-      onFocus={handleFocus} 
-      onBlur={handleBlur} 
-      onKeyDown={handleKeyDown} 
+    <button
+      ref={$self}
+      className={`Button UnitSelectorButton ${isOpen ? 'UnitSelectorButton--open' : ''}`}
+      onClick={handleClickButton}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       {...props}
     >
       {children}
 
-      <div className={`UnitSelectorButton__Dialog ${isOpen ? 'open' : ''}`}>
-        <input type="radio" id="mg" name="mg" value="mg" checked={value === 'mg'} onClick={() => onTypeChange?.('mg')} />
-        <label htmlFor="mg">mg</label>
-
-        <input type="radio" id="g" name="g" value="g" checked={value === 'g'} onClick={() => onTypeChange?.('g')} />
-        <label htmlFor="g">g</label>
-
-        <input type="radio" id="kg" name="kg" value="kg" checked={value === 'kg'} onClick={() => onTypeChange?.('kg')} />
-        <label htmlFor="kg">kg</label>
-
-        <input type="radio" id="lb" name="lb" value="lb" checked={value === 'lb'} onClick={() => onTypeChange?.('lb')} />
-        <label htmlFor="lb">lb</label>
+      <div className="UnitSelectorButton__Dialog">
+        {possibleTypes.map((t, i) => {
+          return (
+            <div className={`UnitSelectorButton__Dialog__Option ${value === t ? 'UnitSelectorButton__Dialog__Option--selected' : ''}`} key={t}>
+              <input
+                type="radio"
+                tabIndex={ isOpen ? 0 : -1 }
+                id={t}
+                name={t}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+                value={t}
+                checked={value === t}
+                onChange={() => {
+                  onTypeChange?.(t as UnitType);
+                  closeDialog();
+                }} />
+              <label htmlFor={t}>{t}</label>
+            </div>
+          );
+        })}
       </div>
     </button>
   );

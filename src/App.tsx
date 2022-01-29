@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, Ref } from 'react';
 import UnitType from './types/UnitType';
-import Category from './types/Category';
+import CategoryType from './types/UnitCategory';
 
 import './App.css';
 import Header from './components/Header';
@@ -18,7 +18,7 @@ export default function App() {
   const [inValue, inValueSet] = useState<string>('50');
   const [inType, inTypeSet] = useState<UnitType>('kg');
   const [outType, outTypeSet] = useState<UnitType>('lb');
-  const [category, categorySet] = useState<Category>(Category.Weight);
+  const [category, categorySet] = useState<CategoryType>(CategoryType.Mass);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => inputRef.current?.focus(), []);
@@ -58,10 +58,10 @@ export default function App() {
       <form autoComplete="off" onSubmit={e => e.preventDefault()} className="UnitConverter">
         <div className="UnitConverter__Display">
           <input aria-label="input value" className="UnitConverter__Input" type="text" name="inValue" id="inValue" value={inValue} onChange={handleInValueChange} ref={inputRef} />
-          <UnitSelectorButton aria-label="change input unit type" name="inType" value={inType} onTypeChange={inTypeSet}>{inType}</UnitSelectorButton>
+          <UnitSelectorButton aria-label="change input unit type" name="inType" value={inType} category={category} onTypeChange={inTypeSet}>{inType}</UnitSelectorButton>
 
           <input aria-label="output value" className="UnitConverter__Input" type="text" name="outValue" id="outValue" value={formatValue(outValue)} readOnly />
-          <UnitSelectorButton name="outType" aria-label="change output unit type" value={outType} onTypeChange={outTypeSet}>{outType}</UnitSelectorButton>
+          <UnitSelectorButton name="outType" aria-label="change output unit type" value={outType} category={category} onTypeChange={outTypeSet}>{outType}</UnitSelectorButton>
         </div>
 
         <div className="UnitConverter__Numpad">

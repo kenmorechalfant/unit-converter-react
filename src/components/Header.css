@@ -20,7 +20,7 @@
 
 @media (min-width: 30em) {
   .Header {
-    border-top-left-radius: 2vh;
-    border-top-right-radius: 2vh;
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
   }
 }

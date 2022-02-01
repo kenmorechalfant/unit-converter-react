@@ -13,47 +13,61 @@ export type UnitSelectorButtonProps = React.HTMLAttributes<HTMLElement> & {
 
 export default function UnitSelectorButton({value, category, onClick, onTypeChange, children, ...props}: UnitSelectorButtonProps) {
   const [isOpen, isOpenSet] = useState<boolean>(false);
-  const [focusState, focusStateSet] = useState<null | 'self' | 'within'>(null);
+  const [focusIndex, focusIndexSet] = useState<number>(0);
   const $self = useRef<HTMLButtonElement | null>(null);
   const possibleTypes: string[] = convert().possibilities(category);
+  let unsubscribeKeyEvents = useRef<() => void>(() => {});
 
   /* 
-    Focus the current radio button when the dialog opens. 
+    Manage focus
   */
   useEffect(() => {
     if (isOpen) {
-      ($self.current?.querySelector(`[name="${value}"]`) as HTMLElement)?.focus(); 
+      ($self.current?.querySelector(`[tabindex='0']`) as HTMLElement)?.focus();
     }
-  }, [isOpen]);
+  }, [isOpen, focusIndex]);
 
   /* 
     Subscribe/Unsubscribe key events 
   */
   useEffect(() => {
-    let unsubscribe = tinykeys(window, {
-      "Space": () => {
-        if (focusState === 'self') openDialog();
-      },
-      "Enter": () => {
-        if (focusState === 'self') openDialog();
-      },
-      "Escape": () => closeDialog()
-    });
+    if (isOpen) {
+      unsubscribeKeyEvents.current = tinykeys(window, {
+        "ArrowDown": focusNext,
+        "ArrowRight": focusNext,
+        "ArrowUp": focusPrev,
+        "ArrowLeft": focusPrev,
+        "Escape": () => closeDialog()
+      });
+    } else {
+      unsubscribeKeyEvents.current?.();
+    }
 
     return () => {
-      unsubscribe();
+      unsubscribeKeyEvents.current?.();
     }
-  });
+  }, [isOpen, focusIndex]);
 
   function openDialog() {
     isOpenSet(true);
   }
 
   function closeDialog() {
-    if (focusState === 'within') {
-      $self.current?.focus();
-      isOpenSet(false);
-    }
+    focusIndexSet(0);
+    $self.current?.focus();
+    isOpenSet(false);
+  }
+
+  function focusNext(e: KeyboardEvent) {
+    e.preventDefault();
+    let max = possibleTypes.length;
+    focusIndexSet((focusIndex + max + 1) % max);
+  }
+
+  function focusPrev(e: KeyboardEvent) {
+    e.preventDefault();
+    let max = possibleTypes.length;
+    focusIndexSet((focusIndex + max - 1) % max);
   }
 
   function handleClickButton(e: any) {
@@ -61,30 +75,24 @@ export default function UnitSelectorButton({value, category, onClick, onTypeChan
     openDialog();
   }
 
-  function handleFocus(e: React.FocusEvent) {
-    // Note: a node contains() itself so we explicitly check for just self first
-    if (e.target === $self.current) {
-      focusStateSet('self');
-      closeDialog();
-    } else if ($self.current?.contains(e.target)) {
-      focusStateSet('within');
-    }
+  function handleFocusSelf(e: React.FocusEvent) {
+    openDialog();
   }
 
   function handleBlur(e: React.FocusEvent) {
     if (!$self.current?.contains(e.relatedTarget)) {
-      focusStateSet(null);
       closeDialog();
     }
   }
 
   return (
     <button
+      role="radiogroup"
       ref={$self}
       className={`Button UnitSelectorButton ${isOpen ? 'UnitSelectorButton--open' : ''}`}
       onClick={handleClickButton}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onFocus={handleFocusSelf}
+      tabIndex={ isOpen ? -1 : 0 }
       {...props}
     >
       {children}
@@ -95,10 +103,9 @@ export default function UnitSelectorButton({value, category, onClick, onTypeChan
             <div className={`UnitSelectorButton__Dialog__Option ${value === t ? 'UnitSelectorButton__Dialog__Option--selected' : ''}`} key={t}>
               <input
                 type="radio"
-                tabIndex={ isOpen ? 0 : -1 }
+                tabIndex={ isOpen && (i === focusIndex) ? 0 : -1 }
                 id={t}
                 name={t}
-                onFocus={handleFocus}
                 onBlur={handleBlur}
                 value={t}
                 checked={value === t}

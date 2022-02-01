@@ -54,20 +54,21 @@ export default function UnitSelectorButton({value, category, onClick, onTypeChan
 
   function closeDialog() {
     focusIndexSet(0);
-    $self.current?.focus();
     isOpenSet(false);
   }
 
   function focusNext(e: KeyboardEvent) {
     e.preventDefault();
     let max = possibleTypes.length;
-    focusIndexSet((focusIndex + max + 1) % max);
+    let nextIndex = (focusIndex + max + 1) % max;
+    focusIndexSet(nextIndex);
   }
 
   function focusPrev(e: KeyboardEvent) {
     e.preventDefault();
     let max = possibleTypes.length;
-    focusIndexSet((focusIndex + max - 1) % max);
+    let prevIndex = (focusIndex + max - 1) % max;
+    focusIndexSet(prevIndex);
   }
 
   function handleClickButton(e: any) {
@@ -76,7 +77,9 @@ export default function UnitSelectorButton({value, category, onClick, onTypeChan
   }
 
   function handleFocusSelf(e: React.FocusEvent) {
-    openDialog();
+    if (e.target === $self.current) {
+      openDialog();
+    }
   }
 
   function handleBlur(e: React.FocusEvent) {
@@ -92,6 +95,7 @@ export default function UnitSelectorButton({value, category, onClick, onTypeChan
       className={`Button UnitSelectorButton ${isOpen ? 'UnitSelectorButton--open' : ''}`}
       onClick={handleClickButton}
       onFocus={handleFocusSelf}
+      onBlur={handleBlur}
       tabIndex={ isOpen ? -1 : 0 }
       {...props}
     >
@@ -106,7 +110,6 @@ export default function UnitSelectorButton({value, category, onClick, onTypeChan
                 tabIndex={ isOpen && (i === focusIndex) ? 0 : -1 }
                 id={t}
                 name={t}
-                onBlur={handleBlur}
                 value={t}
                 checked={value === t}
                 onChange={() => {
